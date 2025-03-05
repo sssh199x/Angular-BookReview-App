@@ -1,0 +1,37 @@
+<div class="book-list-container">
+  <app-header/>
+
+
+  <mat-list class="list">
+    @if (isLoading) {
+      <mat-spinner [diameter]="50"
+
+      />
+    }
+    @else if (error) {
+      <p class="error">{{ error }}</p>
+    }
+    @else {
+      @for (book of books; track book.work.cover_id) {
+        <a [routerLink]="['/book',book.work.cover_id]" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <mat-list-item>
+            <span matListItemTitle>{{ book.work.title }}</span>
+            <span matListItemLine>{{ book.work.author_names[0] }}</span>
+          </mat-list-item>
+        </a>
+      }
+    }
+  </mat-list>
+
+
+  <mat-paginator
+    (page)="onPageChange($event)"
+    [length]="totalBooks"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="pageSizeOptions"
+    [showFirstLastButtons]="true"
+    aria-label="Select page">
+  </mat-paginator>
+
+</div>

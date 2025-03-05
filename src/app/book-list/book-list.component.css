@@ -1,0 +1,59 @@
+
+.book-list-container {
+  padding-bottom: 2rem;
+}
+
+.list {
+  padding: 1rem;
+  width: 90%;
+  margin: auto auto 1rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+:host ::ng-deep .mat-mdc-progress-spinner {
+  margin: auto;
+}
+:host ::ng-deep mat-spinner {
+  --mdc-circular-progress-active-indicator-color: #e66465; /* Change spinner color */
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  color: red;
+  border: 1px dashed rosybrown;
+  border-radius: 4rem;
+  margin: 1rem 0;
+  padding: 0.2rem;
+}
+
+a:hover {
+  color: black;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.05); /* Light background on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+}
+
+
+
+:host ::ng-deep .mat-mdc-paginator {
+  width: 90%;
+  background-color: transparent;
+  border-radius: 4rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  border: 1px solid rosybrown ;
+}
+
+
+
+
+
+
+
+
