@@ -1,11 +1,9 @@
 <div class="book-list-container">
-
-
   <mat-list class="list">
-    @if (isLoading) {
-      <mat-spinner [diameter]="100"
+    <app-search (searchResults)="onSearchResults($event)"/>
 
-      />
+    @if (isLoading) {
+      <mat-spinner [diameter]="100" />
     } @else if (error) {
       <p class="error">{{ error }}</p>
     } @else {
@@ -13,14 +11,18 @@
         <a [routerLink]="['/book',book.work.cover_id]" routerLinkActive="active" ariaCurrentWhenActive="page">
           <mat-list-item>
             <span matListItemTitle>{{ book.work.title }}</span>
-            <span matListItemLine>{{ book.work.author_names[0] }}</span>
+            <span matListItemLine>{{  book.work.author_names.join(', ') }}</span>
           </mat-list-item>
         </a>
+      }
+      @if (paginatedBooks.length === 0) {
+        <p class="no-results">No books found matching your search.</p>
       }
     }
   </mat-list>
 
-  <app-paginator (pageChanged)="onPageChange($event)"/>
-
-
+  <!-- Only show paginator when not in search mode -->
+  @if (!isSearchActive) {
+    <app-paginator (pageChanged)="onPageChange($event)"/>
+  }
 </div>

@@ -1,0 +1,38 @@
+
+.search-container {
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+
+.search-field {
+  width: 280px;
+}
+.label{
+  color: gray;
+}
+/* Input field styling */
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: #f8f8f8;
+  padding: 0 !important;
+  border-radius: 2rem !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+/* Remove default outline */
+:host ::ng-deep .mdc-notched-outline__leading,
+:host ::ng-deep .mdc-notched-outline__notch,
+:host ::ng-deep .mdc-notched-outline__trailing {
+  border: none !important;
+}
+
+/* Style for search icon */
+:host ::ng-deep .mat-icon {
+  color: #8a9ca8;
+  margin-right: 8px;
+}
+
+/* Style for close button */
+:host ::ng-deep .mat-icon-button {
+  color: #8a9ca8;
+}

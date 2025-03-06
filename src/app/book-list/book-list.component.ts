@@ -7,10 +7,11 @@ import {finalize} from 'rxjs';
 import {PageEvent} from '@angular/material/paginator';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {PaginatorComponent} from '../paginator/paginator.component';
+import {SearchComponent} from '../search/search.component';
 
 @Component({
   selector: 'app-book-list',
-  imports: [MatListModule, RouterLink, RouterLinkActive, MatProgressSpinner, PaginatorComponent,],
+  imports: [MatListModule, RouterLink, RouterLinkActive, MatProgressSpinner, PaginatorComponent, SearchComponent,],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css'
 })
@@ -21,6 +22,7 @@ export class BookListComponent implements OnInit {
   paginatedBooks: BooksList[] = [];
   error: string | null = null;
   isLoading: boolean = false;
+  isSearchActive: boolean = false;
 
   ngOnInit() {
     this.paginatedBooks = this.bookReviewService.resetPagination();
@@ -50,5 +52,13 @@ export class BookListComponent implements OnInit {
   onPageChange(event: PageEvent) {
    this.paginatedBooks= this.bookReviewService.handlePageChange(event);
   }
+
+  // Handle search results
+  onSearchResults(results: BooksList[]) {
+    this.isSearchActive = results.length !== this.bookReviewService.getPaginatedBooks().length;
+    this.paginatedBooks = results;
+  }
+
+
 
 }

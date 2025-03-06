@@ -1,4 +1,3 @@
-
 // Interface for book work details
 export interface Work {
   title: string;
