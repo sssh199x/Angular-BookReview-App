@@ -6,10 +6,11 @@
 .list {
   padding: 1rem;
   width: 90%;
-  margin: auto auto 1rem;
+  margin: auto;
   border: 1px solid transparent;
   border-radius: 1rem;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at left, blanchedalmond, azure);
 }
 
 :host ::ng-deep .mat-mdc-progress-spinner {

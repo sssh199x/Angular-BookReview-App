@@ -1,10 +1,9 @@
 <div class="book-list-container">
-  <app-header/>
 
 
   <mat-list class="list">
     @if (isLoading) {
-      <mat-spinner [diameter]="50"
+      <mat-spinner [diameter]="100"
 
       />
     } @else if (error) {

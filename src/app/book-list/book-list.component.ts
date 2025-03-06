@@ -1,7 +1,6 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {MatListModule} from '@angular/material/list';
 import {RouterLink, RouterLinkActive,} from '@angular/router';
-import {HeaderComponent} from '../header/header.component';
 import {BookReviewService} from '../book-review.service';
 import {BooksList} from './book-list.model';
 import {finalize} from 'rxjs';
@@ -11,18 +10,18 @@ import {PaginatorComponent} from '../paginator/paginator.component';
 
 @Component({
   selector: 'app-book-list',
-  imports: [MatListModule, RouterLink, RouterLinkActive, HeaderComponent, MatProgressSpinner, PaginatorComponent,],
+  imports: [MatListModule, RouterLink, RouterLinkActive, MatProgressSpinner, PaginatorComponent,],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css'
 })
-export class BookListComponent {
+export class BookListComponent implements OnInit {
   private bookReviewService: BookReviewService = inject(BookReviewService);
 
   // Books displayed on current page
   paginatedBooks: BooksList[] = [];
   error: string | null = null;
   isLoading: boolean = false;
-  
+
   ngOnInit() {
     this.paginatedBooks = this.bookReviewService.resetPagination();
     this.getBooksList();

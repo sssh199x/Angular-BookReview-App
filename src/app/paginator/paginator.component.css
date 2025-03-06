@@ -1,8 +1,10 @@
 :host ::ng-deep .mat-mdc-paginator {
   width: 90%;
-  background-color: transparent;
+  max-width: 50rem;
+  background: radial-gradient(circle at right, blanchedalmond, azure);
   border-radius: 4rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: auto;
+  margin: 2rem auto 0 auto;
   border: 1px solid rosybrown ;
+  padding: 1rem;
 }
