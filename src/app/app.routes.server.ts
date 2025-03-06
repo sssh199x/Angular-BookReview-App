@@ -10,5 +10,9 @@ export const serverRoutes: ServerRoute[] = [
     path: 'book/:id',
     renderMode: RenderMode.Server  // Server Side Rendering On-Demand
   },
+  {
+    path: 'review/:id',
+    renderMode: RenderMode.Server  // Server Side Rendering On-Demand
+  },
 
 ];
