@@ -41,16 +41,6 @@ a:hover {
 
 
 
-:host ::ng-deep .mat-mdc-paginator {
-  width: 90%;
-  background-color: transparent;
-  border-radius: 4rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: auto;
-  border: 1px solid rosybrown ;
-}
-
-
 
 
 

@@ -7,12 +7,10 @@
       <mat-spinner [diameter]="50"
 
       />
-    }
-    @else if (error) {
+    } @else if (error) {
       <p class="error">{{ error }}</p>
-    }
-    @else {
-      @for (book of books; track book.work.cover_id) {
+    } @else {
+      @for (book of paginatedBooks; track book.work.cover_id) {
         <a [routerLink]="['/book',book.work.cover_id]" routerLinkActive="active" ariaCurrentWhenActive="page">
           <mat-list-item>
             <span matListItemTitle>{{ book.work.title }}</span>
@@ -23,15 +21,7 @@
     }
   </mat-list>
 
+  <app-paginator (pageChanged)="onPageChange($event)"/>
 
-  <mat-paginator
-    (page)="onPageChange($event)"
-    [length]="totalBooks"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    [pageSizeOptions]="pageSizeOptions"
-    [showFirstLastButtons]="true"
-    aria-label="Select page">
-  </mat-paginator>
 
 </div>
