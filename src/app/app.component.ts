@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NavigationEnd, Router, RouterModule,} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RouterModule,} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
-import {filter} from 'rxjs';
+import {filter, map} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,24 +17,43 @@ export class AppComponent implements OnInit {
   isErrorPage = false;
 
   private router: Router = inject(Router);
+  private activatedRoute:ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit() {
-    // Check on init for current route
-    this.checkIfErrorPage(this.router.url);
-
-    //Listen for route changes
+    // More robust router event handling that works with route data
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-        this.checkIfErrorPage(event.url);
-      }
-    );
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map(() => this.getRouteData(this.activatedRoute))
+    ).subscribe(data => {
+      // Check both URL and route data
+      const currentUrl = this.router.url;
+      this.isErrorPage = this.isErrorUrl(currentUrl) || (data && data.isErrorPage);
+    });
   }
 
-  checkIfErrorPage(url: string) {
-    // Check if current route matches any error route pattern
-    this.isErrorPage = url.includes('error-page') || url === '/404';
+
+
+  private getRouteData(route: ActivatedRoute): any {
+    let child = route;
+
+    // Traverse to the deepest child route
+    while (child.firstChild) {
+      child = child.firstChild;
+    }
+
+    return child.snapshot.data;
   }
+
+
+  private isErrorUrl(url: string): boolean {
+    // More comprehensive check for error URLs
+    return url.includes('error-page') ||
+      url === '/404' ||
+      (url !== '/' &&
+        !url.startsWith('/book/') &&
+        !url.startsWith('/review/'));
+  }
+
 
 
 }
