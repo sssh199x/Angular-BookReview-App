@@ -1,2 +1,78 @@
-<p>book-details works!</p>
+<div class="book-details-container">
+  <div class="details-content">
+    @if (isLoading) {
+      <mat-spinner [diameter]="50"/>
+    } @else if (error) {
+      <div class="error-container">
+        <p class="error">{{ error }}</p>
+        <button mat-raised-button color="primary" (click)="navigateBack()">Back to Books</button>
+      </div>
+    } @else if (book) {
+      <div class="book-header">
+        <h2 class="animate-title">{{ book.work.title }}</h2>
+        @if (book.work.author_names && book.work.author_names.length) {
+          <h3 class="animate-subtitle">By {{ book.work.author_names.join(', ') }}</h3>
+        }
+      </div>
+
+      <div class="book-content">
+        <div class="book-cover">
+          @if (book.work.cover_id) {
+            <div class="image-container" [class.loaded]="imageLoaded">
+              <img
+                [ngSrc]="coverImageUrl"
+                (load)="onImageLoad()"
+                alt="{{ book.work.title }} cover"
+                fill
+                priority>
+              <div class="image-loading-indicator" *ngIf="!imageLoaded">
+                <div class="loading-spinner"></div>
+                <span>Loading cover...</span>
+              </div>
+            </div>
+          } @else {
+            <div class="no-cover">
+              <span class="no-cover-icon">📚</span>
+              <span>No cover available</span>
+            </div>
+          }
+        </div>
+
+        <div class="book-info">
+          <div class="info-section">
+            @if (book.work.first_publish_year) {
+              <p class="info-item"><strong>First Published</strong> <span>{{ book.work.first_publish_year }}</span></p>
+            }
+
+            @if (book.logged_date) {
+              <p class="info-item"><strong>Added to Reading List</strong> <span>{{ book.logged_date }}</span></p>
+            }
+
+            @if (book.work.edition_key && book.work.edition_key.length) {
+              <p class="info-item"><strong>Available Editions</strong> <span>{{ book.work.edition_key.length }}</span>
+              </p>
+            }
+
+            <p class="info-item"><strong>Open Library Key</strong> <span>{{ book.work.key }}</span></p>
+          </div>
+
+          <div class="actions">
+            <a class="action-link" (click)="navigateBack()">
+              <span class="action-icon">←</span> Back to Books
+            </a>
+            <a class="action-link review-link" (click)="navigateToReview()">
+              Write a Review <span class="action-icon">✎</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="not-found">
+        <h2>Book Not Found</h2>
+        <p>The book you're looking for could not be found.</p>
+        <button mat-raised-button color="primary" (click)="navigateBack()">Back to Books</button>
+      </div>
+    }
+  </div>
+</div>
 
