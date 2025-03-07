@@ -1,4 +1,7 @@
-<app-header/>
+@if (!isErrorPage) {
+  <!-- Only show header on normal routes -->
+  <app-header/>
+}
 
 <router-outlet></router-outlet>
 

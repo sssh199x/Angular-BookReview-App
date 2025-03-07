@@ -3,7 +3,7 @@
     <app-search (searchResults)="onSearchResults($event)"/>
 
     @if (isLoading) {
-      <mat-spinner [diameter]="100" />
+      <mat-spinner [diameter]="50" />
     } @else if (error) {
       <p class="error">{{ error }}</p>
     } @else {
