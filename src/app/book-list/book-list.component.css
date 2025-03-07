@@ -37,7 +37,6 @@ a:hover {
   background-color: rgba(0, 0, 0, 0.05); /* Light background on hover */
   transform: translateY(-2px); /* Slight lift effect */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow on hover */
-  cursor: pointer; /* Changes cursor to pointer on hover */
 }
 
 
